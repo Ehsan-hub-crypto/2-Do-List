@@ -81,9 +81,190 @@
       animation: page-enter 700ms cubic-bezier(.2, .75, .25, 1) both;
     }
 
+    [hidden] { display: none !important; }
+
+    .auth-card {
+      padding: 22px;
+      border: 1px solid #44334f;
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      animation: auth-enter 300ms ease both;
+    }
+
+    @keyframes auth-enter {
+      from { transform: translateY(7px); }
+      to { transform: translateY(0); }
+    }
+
+    .auth-card h2 {
+      margin: 0 0 7px;
+      font-size: 19px;
+      letter-spacing: -.025em;
+    }
+
+    .auth-copy {
+      margin: 0 0 19px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .auth-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .auth-form label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #100b16;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+    }
+
+    .auth-form input:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--accent), transparent 55%);
+      outline-offset: 2px;
+    }
+
+    .auth-submit {
+      min-height: 42px;
+      margin-top: 3px;
+      border: 0;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #c59aff, #9d68ed);
+      color: #170d21;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .auth-switch {
+      display: block;
+      margin: 15px auto 0;
+      padding: 5px;
+      border: 0;
+      background: transparent;
+      color: var(--pink);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .auth-error {
+      min-height: 18px;
+      margin: 11px 0 0;
+      color: var(--danger);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .auth-note {
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .account-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: -12px 0 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .sign-out {
+      padding: 6px 9px;
+      border: 1px solid #554064;
+      border-radius: 8px;
+      background: #241a2d;
+      color: var(--pink);
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .celebration {
+      position: fixed;
+      z-index: 5;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgb(8 5 12 / 72%);
+      backdrop-filter: blur(7px);
+      animation: celebration-fade 260ms ease both;
+    }
+
+    .celebration-card {
+      width: min(100%, 340px);
+      padding: 28px 24px;
+      border: 1px solid rgb(210 167 255 / 55%);
+      border-radius: 22px;
+      background: linear-gradient(145deg, #251634, #17111f 72%);
+      box-shadow: 0 0 70px rgb(184 114 255 / 25%);
+      text-align: center;
+      animation: celebration-pop 550ms cubic-bezier(.2, .8, .25, 1.2) both;
+    }
+
+    .celebration-emoji {
+      display: block;
+      font-size: 64px;
+      line-height: 1.2;
+      transform-origin: center bottom;
+      animation: celebrate-bounce 720ms ease-in-out infinite alternate;
+    }
+
+    .celebration-message {
+      margin: 14px 0 20px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .celebration-close {
+      padding: 9px 18px;
+      border: 0;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #c59aff, #ff78b9);
+      color: #170d21;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @keyframes celebration-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes celebration-pop {
+      from { opacity: 0; transform: translateY(14px) scale(.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes celebrate-bounce {
+      from { transform: rotate(-9deg) scale(.92); }
+      to { transform: rotate(9deg) scale(1.08); }
+    }
+
     @keyframes page-enter {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { transform: translateY(18px); }
+      to { transform: translateY(0); }
     }
 
     .eyebrow {
@@ -509,6 +690,7 @@
 
     @media (max-width: 520px) {
       body { padding: 48px 16px 32px; }
+      .auth-card { padding: 19px; }
       .list-header { padding-right: 18px; padding-left: 18px; }
       .history-view { padding-right: 18px; padding-left: 18px; }
       .tasks { padding-right: 18px; padding-left: 18px; }
@@ -534,7 +716,29 @@
     <h1>2-Do-List</h1>
     <p class="subtitle">One thing at a time. You’ve got this.</p>
 
-    <section class="list-card" aria-labelledby="list-heading">
+    <section class="auth-card" id="auth-screen" aria-labelledby="auth-title">
+      <h2 id="auth-title">Welcome back</h2>
+      <p class="auth-copy" id="auth-copy">Sign in to see your saved list.</p>
+      <form class="auth-form" id="auth-form">
+        <label for="username-input">Username
+          <input id="username-input" name="username" type="text" minlength="3" maxlength="32" autocomplete="username" required>
+        </label>
+        <label for="password-input">Password
+          <input id="password-input" name="password" type="password" minlength="8" autocomplete="current-password" required>
+        </label>
+        <button class="auth-submit" id="auth-submit" type="submit">Sign in</button>
+      </form>
+      <p class="auth-error" id="auth-error" role="status" aria-live="polite"></p>
+      <button class="auth-switch" id="auth-switch" type="button">Create a new account</button>
+      <p class="auth-note">Your list is encrypted and saved in this browser. This static website does not sync accounts across browsers or devices. Passwords cannot be reset, so keep yours safe.</p>
+    </section>
+
+    <div class="app-shell" id="app-shell" hidden>
+      <div class="account-bar">
+        <span>Signed in as <strong id="user-label"></strong></span>
+        <button class="sign-out" id="sign-out" type="button">Sign out</button>
+      </div>
+      <section class="list-card" aria-labelledby="list-heading">
       <header class="list-header">
         <h2 class="list-label" id="list-heading">Today</h2>
         <div class="header-actions">
@@ -564,9 +768,17 @@
         </div>
         <ul class="history-list" id="history-list"></ul>
       </section>
-    </section>
-    <p class="footer-note"><span>✦</span> Your list is saved on this device</p>
-    <p class="visually-hidden" id="status-message" role="status" aria-live="polite"></p>
+      </section>
+      <p class="footer-note"><span>✦</span> Your list is saved on this device</p>
+      <p class="visually-hidden" id="status-message" role="status" aria-live="polite"></p>
+      <div class="celebration" id="celebration" hidden>
+        <div class="celebration-card" role="status" aria-live="polite">
+          <span class="celebration-emoji" id="celebration-emoji" aria-hidden="true">👏</span>
+          <p class="celebration-message" id="celebration-message"></p>
+          <button class="celebration-close" id="celebration-close" type="button">Aww, thanks!</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <style>
@@ -585,7 +797,9 @@
     (() => {
       const STORAGE_KEY = "little-list-tasks-v1";
       const HISTORY_KEY = "two-do-list-history-v1";
+      const ACCOUNT_KEY = "two-do-list-accounts-v1";
       const HISTORY_WINDOW = 7 * 24 * 60 * 60 * 1000;
+      const PBKDF2_ITERATIONS = 310000;
       const examples = [
         { id: "welcome-1", text: "Take a few minutes to plan the day", completed: true },
         { id: "welcome-2", text: "Reply to that message you’ve been meaning to send", completed: false },
@@ -603,6 +817,29 @@
       const historyView = document.querySelector("#history-view");
       const historyList = document.querySelector("#history-list");
       const clearHistoryButton = document.querySelector("#clear-history");
+      const authScreen = document.querySelector("#auth-screen");
+      const authForm = document.querySelector("#auth-form");
+      const authTitle = document.querySelector("#auth-title");
+      const authCopy = document.querySelector("#auth-copy");
+      const authSubmit = document.querySelector("#auth-submit");
+      const authSwitch = document.querySelector("#auth-switch");
+      const authError = document.querySelector("#auth-error");
+      const usernameInput = document.querySelector("#username-input");
+      const passwordInput = document.querySelector("#password-input");
+      const appShell = document.querySelector("#app-shell");
+      const userLabel = document.querySelector("#user-label");
+      const signOutButton = document.querySelector("#sign-out");
+      const celebration = document.querySelector("#celebration");
+      const celebrationEmoji = document.querySelector("#celebration-emoji");
+      const celebrationMessage = document.querySelector("#celebration-message");
+      const celebrationClose = document.querySelector("#celebration-close");
+      let authMode = "login";
+      let activeAccount = null;
+      let activeKey = null;
+      let tasks = [];
+      let history = [];
+      let saveQueue = Promise.resolve();
+      let celebrationTimeout;
 
       function localDateString(date = new Date()) {
         const year = date.getFullYear();
@@ -629,57 +866,214 @@
       dateInput.min = localDateString();
       dateInput.value = localDateString();
 
-      function loadTasks() {
+      function normalizeTasks(value) {
+        if (!Array.isArray(value)) return [];
+        return value.filter(task =>
+          task && typeof task.id === "string" &&
+          typeof task.text === "string" &&
+          typeof task.completed === "boolean" &&
+          (task.dueDate === undefined || typeof task.dueDate === "string")
+        );
+      }
+
+      function normalizeHistory(value) {
+        if (!Array.isArray(value)) return [];
+        const cutoff = Date.now() - HISTORY_WINDOW;
+        return value.filter(event =>
+          event && typeof event.id === "string" &&
+          ["added", "completed", "reopened", "deleted"].includes(event.action) &&
+          typeof event.text === "string" &&
+          typeof event.timestamp === "string" &&
+          Number.isFinite(Date.parse(event.timestamp)) &&
+          Date.parse(event.timestamp) >= cutoff &&
+          Date.parse(event.timestamp) <= Date.now()
+        );
+      }
+
+      function loadLegacyTasks() {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
           if (saved === null) return examples;
           const parsed = JSON.parse(saved);
-          if (!Array.isArray(parsed)) return examples;
-          return parsed.filter(task =>
-            task && typeof task.id === "string" &&
-            typeof task.text === "string" &&
-            typeof task.completed === "boolean" &&
-            (task.dueDate === undefined || typeof task.dueDate === "string")
-          );
+          return normalizeTasks(parsed);
         } catch (error) {
-          console.warn("Could not load the saved task list.", error);
+          console.warn("Could not migrate the saved task list.", error);
           return examples;
         }
       }
 
-      let tasks = loadTasks();
-
-      function loadHistory() {
+      function loadLegacyHistory() {
         try {
           const saved = localStorage.getItem(HISTORY_KEY);
           if (saved === null) return [];
-          const parsed = JSON.parse(saved);
-          if (!Array.isArray(parsed)) return [];
-          const cutoff = Date.now() - HISTORY_WINDOW;
-          return parsed.filter(event =>
-            event && typeof event.id === "string" &&
-            ["added", "completed", "reopened", "deleted"].includes(event.action) &&
-            typeof event.text === "string" &&
-            typeof event.timestamp === "string" &&
-            Number.isFinite(Date.parse(event.timestamp)) &&
-            Date.parse(event.timestamp) >= cutoff &&
-            Date.parse(event.timestamp) <= Date.now()
-          );
+          return normalizeHistory(JSON.parse(saved));
         } catch (error) {
-          console.warn("Could not load task history.", error);
+          console.warn("Could not migrate task history.", error);
           return [];
         }
       }
 
-      let history = loadHistory();
+      function readAccounts() {
+        const saved = localStorage.getItem(ACCOUNT_KEY);
+        if (saved === null) return [];
+        const parsed = JSON.parse(saved);
+        if (!Array.isArray(parsed)) throw new Error("The saved account list is not valid.");
+        return parsed.filter(account =>
+          account && typeof account.username === "string" &&
+          typeof account.salt === "string" &&
+          typeof account.iv === "string" &&
+          typeof account.ciphertext === "string"
+        );
+      }
 
-      function saveHistory() {
-        try {
-          localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-        } catch (error) {
-          console.warn("Could not save task history.", error);
-          status.textContent = "Your task history could not be saved on this device.";
+      function toBase64(bytes) {
+        let binary = "";
+        for (const byte of bytes) binary += String.fromCharCode(byte);
+        return btoa(binary);
+      }
+
+      function fromBase64(value) {
+        const binary = atob(value);
+        return Uint8Array.from(binary, char => char.charCodeAt(0));
+      }
+
+      async function deriveKey(password, salt) {
+        const material = await crypto.subtle.importKey(
+          "raw",
+          new TextEncoder().encode(password),
+          "PBKDF2",
+          false,
+          ["deriveKey"]
+        );
+        return crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt, iterations: PBKDF2_ITERATIONS, hash: "SHA-256" },
+          material,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["encrypt", "decrypt"]
+        );
+      }
+
+      async function encryptVault(key, data) {
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const encrypted = await crypto.subtle.encrypt(
+          { name: "AES-GCM", iv },
+          key,
+          new TextEncoder().encode(JSON.stringify(data))
+        );
+        return { iv: toBase64(iv), ciphertext: toBase64(new Uint8Array(encrypted)) };
+      }
+
+      async function decryptVault(key, account) {
+        const decrypted = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: fromBase64(account.iv) },
+          key,
+          fromBase64(account.ciphertext)
+        );
+        const data = JSON.parse(new TextDecoder().decode(decrypted));
+        if (!data || !Array.isArray(data.tasks) || !Array.isArray(data.history)) {
+          throw new Error("This account's saved data is invalid.");
         }
+        return { tasks: normalizeTasks(data.tasks), history: normalizeHistory(data.history) };
+      }
+
+      function showApp(username, data, key, account) {
+        activeAccount = account;
+        activeKey = key;
+        tasks = data.tasks;
+        history = data.history;
+        userLabel.textContent = username;
+        authScreen.hidden = true;
+        appShell.hidden = false;
+        title.textContent = "Today";
+        historyView.hidden = true;
+        taskView.hidden = false;
+        historyToggle.textContent = "History";
+        historyToggle.setAttribute("aria-expanded", "false");
+        render();
+        void persistData();
+        input.focus();
+      }
+
+      function setAuthMode(mode) {
+        authMode = mode;
+        const creating = mode === "register";
+        authTitle.textContent = creating ? "Create your account" : "Welcome back";
+        authCopy.textContent = creating
+          ? "Choose a username and password to protect your list."
+          : "Sign in to see your saved list.";
+        authSubmit.textContent = creating ? "Create account" : "Sign in";
+        authSwitch.textContent = creating ? "Already have an account? Sign in" : "Create a new account";
+        passwordInput.autocomplete = creating ? "new-password" : "current-password";
+        authError.textContent = "";
+      }
+
+      async function createAccount(username, password) {
+        const normalizedUsername = username.trim().toLowerCase();
+        if (!/^[a-z0-9._-]{3,32}$/.test(normalizedUsername)) {
+          throw new Error("Use 3–32 letters, numbers, dots, dashes, or underscores for your username.");
+        }
+        if (password.length < 8) throw new Error("Your password must be at least 8 characters.");
+        const accounts = readAccounts();
+        if (accounts.some(account => account.username === normalizedUsername)) {
+          throw new Error("That username already exists in this browser. Try signing in instead.");
+        }
+        if (!crypto.subtle) throw new Error("Encrypted accounts need a secure browser context, such as HTTPS.");
+
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const key = await deriveKey(password, salt);
+        const isFirstAccount = accounts.length === 0;
+        const data = {
+          tasks: isFirstAccount ? loadLegacyTasks() : [],
+          history: isFirstAccount ? loadLegacyHistory() : []
+        };
+        const encrypted = await encryptVault(key, data);
+        const account = {
+          username: normalizedUsername,
+          salt: toBase64(salt),
+          ...encrypted
+        };
+        accounts.push(account);
+        localStorage.setItem(ACCOUNT_KEY, JSON.stringify(accounts));
+        if (isFirstAccount) {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.removeItem(HISTORY_KEY);
+        }
+        showApp(normalizedUsername, data, key, account);
+      }
+
+      async function signIn(username, password) {
+        const normalizedUsername = username.trim().toLowerCase();
+        const account = readAccounts().find(item => item.username === normalizedUsername);
+        if (!account) throw new Error("Username or password is incorrect.");
+        try {
+          const key = await deriveKey(password, fromBase64(account.salt));
+          const data = await decryptVault(key, account);
+          showApp(normalizedUsername, data, key, account);
+        } catch (error) {
+          if (error instanceof DOMException && error.name === "OperationError") {
+            throw new Error("Username or password is incorrect.");
+          }
+          throw error;
+        }
+      }
+
+      function persistData() {
+        if (!activeAccount || !activeKey) return Promise.resolve();
+        const snapshot = { tasks, history };
+        saveQueue = saveQueue.then(async () => {
+          const accounts = readAccounts();
+          const index = accounts.findIndex(item => item.username === activeAccount.username);
+          if (index < 0) throw new Error("The local account was removed.");
+          const encrypted = await encryptVault(activeKey, snapshot);
+          accounts[index] = { ...accounts[index], ...encrypted };
+          localStorage.setItem(ACCOUNT_KEY, JSON.stringify(accounts));
+          activeAccount = accounts[index];
+        }).catch(error => {
+          console.error("Could not save the encrypted account data.", error);
+          status.textContent = "Your changes could not be saved. Check browser storage and try again.";
+        });
+        return saveQueue;
       }
 
       function recordHistory(action, text, dueDate = "") {
@@ -692,7 +1086,6 @@
           dueDate,
           timestamp: new Date().toISOString()
         });
-        saveHistory();
       }
 
       function renderHistory() {
@@ -738,13 +1131,23 @@
         }
       }
 
-      function saveTasks() {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-        } catch (error) {
-          console.warn("Could not save the task list.", error);
-          status.textContent = "Your changes could not be saved on this device.";
-        }
+      const saveTasks = persistData;
+      const saveHistory = persistData;
+
+      function celebrateCompletion() {
+        const celebrations = [
+          { emoji: "👏", message: "Look at you go! You finished your list!" },
+          { emoji: "😊", message: "All done! You absolutely crushed it." },
+          { emoji: "🎉", message: "Task tornado defeated. Amazing work!" },
+          { emoji: "🙌", message: "You showed up and got it done. Nice!" },
+          { emoji: "🌟", message: "A whole list completed. You’re a star!" }
+        ];
+        const moment = celebrations[Math.floor(Math.random() * celebrations.length)];
+        celebrationEmoji.textContent = moment.emoji;
+        celebrationMessage.textContent = moment.message;
+        celebration.hidden = false;
+        window.clearTimeout(celebrationTimeout);
+        celebrationTimeout = window.setTimeout(() => { celebration.hidden = true; }, 5000);
       }
 
       function render() {
@@ -765,9 +1168,13 @@
           checkbox.setAttribute("aria-label", `${task.completed ? "Mark incomplete" : "Complete"}: ${task.text}`);
           checkbox.addEventListener("change", () => {
             task.completed = checkbox.checked;
-            recordHistory(checkbox.checked ? "completed" : "reopened", task.text);
+            recordHistory(checkbox.checked ? "completed" : "reopened", task.text, task.dueDate || "");
             saveTasks();
             render();
+            const dueToday = tasks.filter(item => !item.dueDate || item.dueDate <= localDateString());
+            if (checkbox.checked && dueToday.length > 0 && dueToday.every(item => item.completed)) {
+              celebrateCompletion();
+            }
             status.textContent = checkbox.checked ? "Task completed." : "Task marked incomplete.";
           });
           const checkmark = document.createElement("span");
@@ -797,7 +1204,7 @@
           remove.innerHTML = '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 7v8m4-8v8m4-8v8M4 5h12m-7-2h2m4 2-.7 11H5.7L5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
           remove.addEventListener("click", () => {
             tasks = tasks.filter(item => item.id !== task.id);
-            recordHistory("deleted", task.text);
+            recordHistory("deleted", task.text, task.dueDate || "");
             saveTasks();
             render();
             status.textContent = "Task deleted.";
@@ -850,13 +1257,55 @@
         historyToggle.textContent = showingHistory ? "Back to tasks" : "History";
         historyToggle.setAttribute("aria-expanded", String(showingHistory));
         if (showingHistory) {
-          history = loadHistory();
+          history = normalizeHistory(history);
           saveHistory();
           renderHistory();
         }
       });
 
-      saveHistory();
+      authSwitch.addEventListener("click", () => {
+        setAuthMode(authMode === "login" ? "register" : "login");
+      });
+
+      authForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        authError.textContent = "";
+        authSubmit.disabled = true;
+        try {
+          if (authMode === "register") {
+            await createAccount(usernameInput.value, passwordInput.value);
+          } else {
+            await signIn(usernameInput.value, passwordInput.value);
+          }
+          passwordInput.value = "";
+        } catch (error) {
+          console.error("Account sign-in failed.", error);
+          authError.textContent = error.message || "Could not open this account.";
+        } finally {
+          authSubmit.disabled = false;
+        }
+      });
+
+      signOutButton.addEventListener("click", async () => {
+        await saveQueue;
+        activeAccount = null;
+        activeKey = null;
+        tasks = [];
+        history = [];
+        appShell.hidden = true;
+        authScreen.hidden = false;
+        usernameInput.value = "";
+        passwordInput.value = "";
+        passwordInput.focus();
+        setAuthMode("login");
+      });
+
+      celebrationClose.addEventListener("click", () => {
+        window.clearTimeout(celebrationTimeout);
+        celebration.hidden = true;
+      });
+
+      setAuthMode("login");
       render();
     })();
   </script>
