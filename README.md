@@ -1,28 +1,29 @@
 # 2-Do-List
 
-A calm, single-page to-do list for planning your day. Add tasks with due dates, track what you complete, and review recent activity in the history view. Tasks and activity are saved in your browser on the device you’re using.
+A calm, single-page to-do list for planning your day. Create a local account, add tasks with due dates, track completions, and review recent activity.
 
 ## Features
 
-- Add tasks up to 160 characters and schedule them for today or a future date
+- Create an account and sign in with a username and password
+- Add tasks of up to 160 characters and schedule them for today or a future date
 - Mark tasks complete or reopen them
 - See how many tasks remain
-- Review task activity from the last 7 days, including additions, completions, reopenings, and deletions
-- Clear task history without deleting your current tasks
-- Save tasks and history with browser `localStorage`
+- Review additions, completions, reopenings, and deletions from the last 7 days
+- Clear activity history without deleting current tasks
+- Get a celebration when you finish the tasks due today
 - Responsive layout, keyboard focus styles, and reduced-motion support
-- No frameworks, build step, or external dependencies
+- Runs as a standalone HTML file with no frameworks or build step
 
 ## Run it
 
-Open `index.html` in a modern web browser. The app runs entirely in the browser.
+Open `index.html` in a modern browser. For account creation and encrypted storage, use a secure context such as HTTPS. GitHub Pages provides HTTPS when the site is published.
 
-To publish it with GitHub Pages, add `index.html` and this `README.md` to a GitHub repository, then enable GitHub Pages in the repository settings.
+## Accounts and data
 
-## Data and privacy
+This is a static, browser-only app. It does not use a server, and accounts do not sync across browsers or devices. Account information and encrypted task data are stored in the browser's local storage. The app encrypts task data with a key derived from your password, but this is not a hosted account or cloud backup.
 
-Tasks and activity history are stored in this browser’s local storage. They are not sent to a server. They won’t automatically appear in another browser or on another device. Clearing the browser’s site data may erase them.
+Passwords cannot be reset. Keep your password safe. Clearing this site's browser data can remove accounts and saved lists permanently.
 
 ## Browser support
 
-Use a modern browser with JavaScript, `localStorage`, and `crypto.randomUUID()` enabled.
+Use a modern browser with JavaScript, `localStorage`, Web Crypto, and `crypto.randomUUID()` enabled.
